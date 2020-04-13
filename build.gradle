@@ -1,8 +1,18 @@
-plugins {
-    id 'org.springframework.boot' version '2.2.6.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-    id 'java'
+buildscript {
+    ext {
+        springBootVersion = '2.1.8.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 group = 'com.lr.service'
 version = '0.0.1-SNAPSHOT'
@@ -12,12 +22,14 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+ext {
+    springCloudVersion = 'Greenwich.SR3'
+}
 
+dependencies {
+    compile('commons-collections:commons-collections:3.2.2')
+    //mysql driver.
+    runtime('mysql:mysql-connector-java')
 
     //服务器注册与发现,注意新版需增加starter-web
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
@@ -45,6 +57,9 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-test {
-    useJUnitPlatform()
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }

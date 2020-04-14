@@ -22,17 +22,15 @@ eureka:
     healthcheck:
       enabled: true
     serviceUrl:
-      defaultZone: http://120.53.19.183:9001/eureka/
+      defaultZone: http://192.168.30.158:9001/eureka/
     fetch-registry: true
 
 spring:
   application:
     name: test-demo
-
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      filters: stat,wall,log4j
       initial-size: 1
       max-active: 50
       #min-idle: 10
@@ -40,21 +38,13 @@ spring:
       time-between-eviction-runs-millis: 600000 #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒，default value is 5000 (5 seconds)->60000-600000
       min-evictable-idle-time-millis: 3600000 #配置一个连接在池中最小生存的时间，单位是毫秒，default value is 60000 (60 seconds)->300000-3600000
       pool-prepared-statements: false #是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。
-      url: jdbc:mysql://120.53.19.183:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+      url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
       username: root
       password: root
       driver-class-name: com.mysql.jdbc.Driver
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: HTML
-    encoding: UTF-8
 mybatis:
   #需要配合自动扫描Mappers包
   type-aliases-package: com.lr.service.testdemo.dao
   #mappers.xml所在位置
   mapper-locations: classpath:mappers/*.xml
   config-location: classpath:mybatis-config.xml
-
-

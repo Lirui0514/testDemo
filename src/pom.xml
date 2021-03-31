@@ -20,7 +20,7 @@
     <commons-lang3>3.7</commons-lang3>
     <commons-codec>1.13</commons-codec>
     <commons-collections.version>3.2.2</commons-collections.version>
-    <guava.version>28.1-jre</guava.version>
+    <guava.version>29.0-jre</guava.version>
     <!-- maven -setting -->
     <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
     <maven-build-timestamp.format>yyyy-MM-dd HH:mm:ss</maven-build-timestamp.format>
